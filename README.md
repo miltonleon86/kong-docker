@@ -33,5 +33,3 @@ Response:
 http://0.0.0.0:8080
 
 ```
-
-- I will send the passwords via Slack.
