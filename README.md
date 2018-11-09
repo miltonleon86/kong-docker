@@ -31,8 +31,7 @@ Response:
 - Check the ui on the browser:
 ```$bash
 http://0.0.0.0:8080
-or for us guys:
-http://miltonleon.com
+
 ```
 
 - I will send the passwords via Slack.

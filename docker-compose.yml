@@ -36,7 +36,7 @@ services:
     depends_on:
       - kong-database
       - kong
-    command: start --kong-url http://kong:8001 --basic-auth milton=milton321 omar=omar321 ivan=ivan321
+    command: start --kong-url http://kong:8001 --basic-auth test=test321
     networks:
       - dev
     ports:
