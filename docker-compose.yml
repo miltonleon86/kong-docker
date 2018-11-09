@@ -1,0 +1,43 @@
+version: '3.2'
+
+networks:
+  dev:
+
+services:
+  kong-database:
+    image: postgres:9.5
+    networks:
+      - dev
+    env_file:
+      - env/postgress_dev
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    restart: on-failure
+
+  kong:
+    image: kong:latest
+    networks:
+      - dev
+    command: kong start --run-migrations
+    depends_on:
+      - kong-database
+    env_file:
+      - env/kong_dev
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8443:8443"
+      - "8444:8444"
+    restart: on-failure
+
+  ui:
+    image: pgbi/kong-dashboard
+    restart: on-failure
+    depends_on:
+      - kong-database
+      - kong
+    command: start --kong-url http://kong:8001 --basic-auth milton=milton321 omar=omar321 ivan=ivan321
+    networks:
+      - dev
+    ports:
+      - "8080:8080"
